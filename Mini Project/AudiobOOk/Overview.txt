@@ -1,0 +1,37 @@
+PDF to Audiobook Converter Documentation
+Overview:
+This project converts a PDF document into an audiobook.
+It utilizes Python libraries to read the text from a PDF file and convert it to speech,
+providing a simple user interface for file selection and playback control.
+
+Libraries Used:
+-- PyPDF2: Used to read the content of the PDF file.
+-- pyttsx3: A text-to-speech conversion library in Python.
+-- Tkinter: A standard GUI library in Python, used here for the file dialog to select the PDF file.
+How It Works?
+*PDF File Selection:
+The program starts by opening a file dialog, 
+allowing the user to select a PDF file from their system.
+
+*Reading the PDF File:
+Once the PDF is selected, the PyPDF2 library is used to read the contents of the file.
+The number of pages in the PDF is determined and displayed.
+
+*Text to Speech Conversion:
+The pyttsx3 library initializes a text-to-speech engine.
+The program loops through each page of the PDF, extracts the text,
+and uses the text-to-speech engine to convert the text to speech.
+
+*User Playback Control:
+During playback, the user is given control to pause, resume, or quit the audiobook playback.
+The user can pause the playback by pressing 'p', resume by pressing 'r', or 
+quit the program by pressing 'q'.
+
+*Overall View:
+The PDF to Audiobook Converter is designed to be a straightforward tool
+for converting text-based PDF documents into audio format. It provides an easy-to-use 
+interface for selecting files and controlling playback, making it
+accessible to users who want to listen to their documents rather than read them.
+The combination of PyPDF2 and pyttsx3 ensures that text extraction and conversion 
+are handled efficiently, while Tkinter provides a familiar and simple way to 
+interact with the file system.
