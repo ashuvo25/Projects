@@ -97,8 +97,7 @@ def create_gui():
                     relief="flat",
                     borderwidth=0)
     
-    browse_button = Button(root, text="Browse Folder", command=open_folder, font=("Arial", 12),
-                           bg="white", fg="black", relief="flat", padx=20, pady=10)
+    browse_button = Button(root, text="Browse Folder", command=open_folder, font=("Arial", 12),bg="white", fg="black", relief="flat", padx=20, pady=10)
     browse_button.pack(pady=10)
     exit_button = Button(root, text="Exit", command=root.quit, font=("Arial", 12), bg="white", fg="black", relief="flat", padx=20, pady=10)
     exit_button.pack(pady=10)
