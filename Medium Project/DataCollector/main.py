@@ -5,6 +5,7 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Alignment
 from openpyxl.utils import get_column_letter
 from tkinter import Tk, filedialog, Label, Button, messagebox
+from tkinter import ttk
 
 # Function to get file details
 def get_files_details(folder_path):
@@ -13,7 +14,6 @@ def get_files_details(folder_path):
         for file in files:
             file_path = os.path.join(root, file)
             file_size = os.path.getsize(file_path)
-            # Convert file size to appropriate units
             if file_size < 1024:  # Less than 1 KB
                 file_size_display = f"{file_size} Bytes"
             elif file_size < 1024 ** 2:  # Less than 1 MB
@@ -36,26 +36,21 @@ def is_file_in_sheet(worksheet, file_name):
 # Function to write data to Excel
 def write_to_excel(folder_path, excel_name='files_data.xlsx'):
     file_details = get_files_details(folder_path)
-
     code_folder = os.path.dirname(os.path.abspath(__file__))
     excel_path = os.path.join(code_folder, excel_name)
-
-    # Get the last folder name from the folder path
     last_folder_name = os.path.basename(os.path.normpath(folder_path))
-
     if os.path.exists(excel_path):
         wb = load_workbook(excel_path)
     else:
         wb = Workbook()
-
-    # Create or use the existing sheet for the last folder name
+    
     if last_folder_name not in wb.sheetnames:
         ws = wb.create_sheet(title=last_folder_name)
         ws.append(['File Name', 'File Size', 'Date Stored'])  
     else:
         ws = wb[last_folder_name]
 
-    # Append only new file details
+    # Append only when new file found
     new_files_count = 0
     for detail in file_details:
         file_name, file_size, date_stored = detail
@@ -90,18 +85,25 @@ def create_gui():
     root = Tk()
     root.title("File Details Collector")
     root.geometry("400x200")
-
-    label = Label(root, text="Click below to select a folder", font=("Arial", 14))
+    root.configure(bg="black")
+    label = Label(root, text="Click below to select a folder", font=("Arial", 14), bg="black", fg="white")
     label.pack(pady=20)
-
-    browse_button = Button(root, text="Browse Folder", command=open_folder, font=("Arial", 12))
+    style = ttk.Style()
+    style.configure("TButton",
+                    font=("Arial", 12),
+                    padding=10,
+                    background="white",
+                    foreground="black",
+                    relief="flat",
+                    borderwidth=0)
+    
+    browse_button = Button(root, text="Browse Folder", command=open_folder, font=("Arial", 12),
+                           bg="white", fg="black", relief="flat", padx=20, pady=10)
     browse_button.pack(pady=10)
-
-    exit_button = Button(root, text="Exit", command=root.quit, font=("Arial", 12))
+    exit_button = Button(root, text="Exit", command=root.quit, font=("Arial", 12), bg="white", fg="black", relief="flat", padx=20, pady=10)
     exit_button.pack(pady=10)
-
     root.mainloop()
 
-# Main function to run the GUI
+
 if __name__ == "__main__":
     create_gui()
